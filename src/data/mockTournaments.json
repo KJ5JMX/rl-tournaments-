@@ -1,0 +1,18 @@
+{
+  "tournaments": [
+    {
+      "id": "mock-na-1",
+      "region": "NA",
+      "mode": "2v2",
+      "players": 32,
+      "starts": "2026-02-10T18:00:00Z"
+    },
+    {
+      "id": "mock-na-2",
+      "region": "NA",
+      "mode": "3v3",
+      "players": 64,
+      "starts": "2026-02-11T02:00:00Z"
+    }
+  ]
+}

@@ -1,0 +1,28 @@
+import mockData from "../data/mockTournaments.json";
+
+const API_HOST = "rocket-league1.p.rapidapi.com";
+
+//using mock data for testing purposes
+const USE_MOCK_DATA = true;
+
+export async function fetchTrounamentsByRegion(region) {
+  if (USE_MOCK_DATA) {
+    return mockData;
+  }
+
+  const url = "https://${{API_HOST}/tournaments/${region}";
+
+  const response = await fetch(url, {
+    method: "GET",
+    headers: {
+      "X-RapidAPI-Key": import.meta.env.VITE_RAPIDAPI_KEY,
+      "X-RapidAPI-Host": API_HOST,
+    },
+  });
+
+  if (!response.ok) {
+    throw new Error("API request failed: ${response.status}");
+  }
+
+  return response.json();
+}
