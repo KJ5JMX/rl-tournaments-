@@ -38,3 +38,33 @@
   text-align: center;
   color: #777;
 }
+.tournamentList {
+  list-style: none;
+  padding: 0;
+  margin: 16px 0 0;
+  display: grid;
+  gap: 12px;
+}
+
+.tournamentCard {
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  padding: 12px 14px;
+  background: #fff;
+}
+
+.tournamentRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 12px;
+}
+
+.tournamentMode {
+  font-weight: 600;
+}
+
+.tournamentMeta,
+.tournamentStart {
+  color: #555;
+}

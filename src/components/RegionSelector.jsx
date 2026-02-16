@@ -7,9 +7,9 @@ export default function RegionSelector({ region, onRegionChange, onLoad }) {
           <option value="">Select a region</option>
           <option value="NA">North America</option>
           <option value="EU">Europe</option>
-          <option value="AS">Asia</option>
-          <option value="SA">South America</option>
-          <option value="OC">Oceania</option>
+          <option value="ASIA">Asia</option>
+          <option value="SAM">South America</option>
+          <option value="OCE">Oceania</option>
         </select>
       </label>
 
