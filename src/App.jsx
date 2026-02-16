@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import "./App.css";
 import RegionSelector from "./components/RegionSelector";
 import { fetchTournamentsByRegion } from "./services/api";
@@ -8,14 +8,28 @@ export default function App() {
   const [tournaments, setTournaments] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+  const cacheRef = useRef({});
+
+  function handleRegionChange(nextRegion) {
+    setRegion(nextRegion);
+    setTournaments([]);
+    setError(null);
+  }
 
   async function handleLoadTournaments() {
+    if (!region) return;
+
     setLoading(true);
     setError(null);
 
     try {
-      const data = await fetchTournamentsByRegion(region);
-      setTournaments(data.tournaments || []);
+      if (cacheRef.current[region]) {
+        setTournaments(cacheRef.current[region]);
+      } else {
+        const data = await fetchTournamentsByRegion(region);
+        setTournaments(data.tournaments || []);
+        cacheRef.current[region] = data.tournaments || [];
+      }
     } catch (error) {
       setError("Failed to load tournaments. Please try again.");
     } finally {
@@ -35,7 +49,7 @@ export default function App() {
       <main className="main">
         <RegionSelector
           region={region}
-          onRegionChange={setRegion}
+          onRegionChange={handleRegionChange}
           onLoad={handleLoadTournaments}
         />
 
@@ -50,7 +64,7 @@ export default function App() {
           {tournaments.map((t) => (
             <li key={t.id}>
               {t.mode} • {t.players} players •{" "}
-              {new Date(t.starts).toLocaleString()}
+              {t.starts ? new Date(t.starts).toLocaleString() : "TBD"}
             </li>
           ))}
         </ul>

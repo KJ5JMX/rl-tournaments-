@@ -5,7 +5,10 @@ const USE_MOCK_DATA = true;
 //using mock data for now.
 export async function fetchTournamentsByRegion(region) {
   if (USE_MOCK_DATA) {
-    return mockData;
+    const list = Array.isArray(mockData.tournaments)
+      ? mockData.tournaments
+      : [];
+    return { tournaments: list.filter((t) => t.region === region) };
   }
 
   const url = `https://${API_HOST}/tournaments/${region}`;
