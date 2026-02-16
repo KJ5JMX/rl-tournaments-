@@ -1,7 +1,7 @@
 import mockData from "../data/mockTournaments.json";
 
 const API_HOST = "rocket-league1.p.rapidapi.com";
-const USE_MOCK_DATA = true;
+const USE_MOCK_DATA = import.meta.env.VITE_USE_MOCK_DATA === "true";
 //using mock data for now.
 export async function fetchTournamentsByRegion(region) {
   if (USE_MOCK_DATA) {
